@@ -1,14 +1,32 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { TouchableOpacity, Text, StyleSheet, Linking } from 'react-native';
 
-const ButtonDownload = () => {
-  return (
-    <View>
-      <Text>ButtonDownload</Text>
-    </View>
-  )
+interface ButtonDownloadProps {
+  title: string;
+  pdfUrl: string;
 }
 
-export default ButtonDownload
+const ButtonDownload: React.FC<ButtonDownloadProps> = ({ title, pdfUrl }) => {
+  const handlePress = () => {
+    Linking.openURL(pdfUrl);
+  };
 
-const styles = StyleSheet.create({})
+  return (
+    <TouchableOpacity style={styles.button} onPress={handlePress}>
+      <Text style={styles.text}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#0077cc',
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 5,
+    alignItems: 'center',
+  },
+  text: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+});
+
+export default ButtonDownload;
